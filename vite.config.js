@@ -10,9 +10,15 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  base: '/TrueVibe-MVP',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  envPrefix: 'VITE_', // Ensure Vite uses .env files with VITE_ prefix
 })
+
+
+
+
