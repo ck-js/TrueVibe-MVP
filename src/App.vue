@@ -10,4 +10,5 @@ import Quiz from './components/Quiz.vue';
 
 <style scoped>
 
+
 </style>
