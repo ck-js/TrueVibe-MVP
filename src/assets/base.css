@@ -60,9 +60,7 @@
   margin: 0;
   font-weight: normal;
 }
-html {
-  background-color: salmon;
-}
+
 body {
   min-height: 100vh;
   color: var(--color-text);

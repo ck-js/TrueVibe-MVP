@@ -1,6 +1,5 @@
-<script>
+<script >
 import { supabase } from './supabase';
-
 export default {
     data() {
         return {
@@ -205,4 +204,8 @@ input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-</style>
+</style>```
+
+
+
+
