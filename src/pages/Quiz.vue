@@ -1,5 +1,11 @@
 <script >
-import { supabase } from './supabase';
+// import { supabase } from '@/composables/UseSupabase';
+import useAuthUser from '@/composables/UseAuthUser';
+import useSupabase from "@/composables/UseSupabase"
+
+const {supabase } = useSupabase();
+
+
 export default {
     data() {
         return {
@@ -135,6 +141,7 @@ export default {
 <style scoped>
 .quiz {
     max-width: 600px;
+    
     margin: 0 auto;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -173,8 +180,8 @@ color: inherit;
 .navigation-buttons {
     display: flex;
     flex-direction: column;
-    row-gap: 3px;
-    margin: 15px auto;
+    row-gap: 9px;
+    margin: 27px auto;
     
 }
 .navigation-buttons button {

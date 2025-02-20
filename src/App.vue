@@ -1,41 +1,40 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import {supabase} from './components/supabase'
+import { useRouter, RouterView } from 'vue-router';
+import AppHeader from './components/AppHeader.vue';
 
-import Quiz from './components/Quiz.vue';
-import AuthLogin from './components/Auth.vue'
-import Account from './components/Account.vue'
 
-const session = ref()
-const showLogin = ref(false)
+const router = useRouter();
 
-const toggleLogin = () => {
-  showLogin.value = !showLogin.value
-}
-
-const checkSession = async () => {
-  const { data } = await supabase.auth.getSession();
-  session.value = data.session;
-};
-onMounted(() => {
-  checkSession();
-
-  supabase.auth.onAuthStateChange((_event, session) => {
-    session.value = session;
+const goToRegister = () => {
+  router.push({
+    name: "Register",
   });
-})
+
+};
   </script>
 
 <template>
   <header>
-    <button @click="toggleLogin" class="login-button">Login</button>
+    <nav>
+    <AppHeader />
+    
+  </nav>
+    
   </header>
+<main>
 
-  <Quiz v-if="!showLogin" />
-  <div v-if="showLogin" class="container" style="padding: 50px 0 100px 0">
-    <Account v-if="session" :session="session" />
-    <AuthLogin v-else />
-  </div>
+  <RouterView />
+
+</main>
+
+
+
+  <!-- <Quiz v-if="!showLogin" /> -->
+  <!-- <div v-if="showLogin" class="container" style="padding: 50px 0 100px 0"> -->
+    <!-- <Account v-if="session" :session="session" />
+    <AuthLogin v-else /> -->
+  <!-- </div> -->
 
 
 
@@ -49,13 +48,6 @@ header {
   
 }
 
-.login-button {
-  padding: 10px 20px;
-  background-color: salmon;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+
 
 </style>
