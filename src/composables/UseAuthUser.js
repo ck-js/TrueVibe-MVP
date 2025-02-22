@@ -12,7 +12,7 @@ export default function useAuthUser() {
    * Login with email and password
    */
   const login = async ({ email, password }) => {
-    const { user, error } = await supabase.auth.signIn({ email, password });
+    const { user: loggedInUser, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
     return user;
   };
@@ -31,7 +31,7 @@ export default function useAuthUser() {
    * Login with google, github, etc
    */
   const loginWithSocialProvider = async (token) => {
-    const { user, error } = await supabase.auth.signIn({ provider });
+    const { user: loggedInUser, error } = await supabase.auth.signInWithOAuth({ provider });
     if (error) throw error;
     return user;
   };

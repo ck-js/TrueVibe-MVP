@@ -22,7 +22,7 @@ const handleLogin = async (provider) => {
       : await login(form.value);
     router.push({ name: "Me" });
   } catch (error) {
-    alert(error.message);
+    alert('Hmm...' + error.message);
   }
 };
 </script>
