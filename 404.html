@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Page Not Found</title>
+</head>
+<body>
+  <script>
+    // Redirect to the index.html with the current URL
+    const path = window.location.pathname;
+    const newPath = path.replace('/TrueVibe-MVP/', '');
+    window.location.replace('/TrueVibe-MVP/#' + newPath);
+  </script>
+</body>
+</html>
