@@ -41,12 +41,7 @@ const goToRegister = () => {
 </template>
 
 <style scoped>
-header {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
-  
-}
+
 
 
 

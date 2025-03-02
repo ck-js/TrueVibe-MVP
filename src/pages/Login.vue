@@ -22,19 +22,19 @@ const handleLogin = async (provider) => {
       : await login(form.value);
     router.push({ name: "Me" });
   } catch (error) {
-    alert('Hmm...' + error.message);
+    alert('Hmm...' +error.message);
   }
 };
 </script>
 <template>
   <div class="container">
-    <img src="../assets/truevibe-logo.jpg" alt="truevibe heart pink logo">
+    <img src="../assets//true vibe logo_transparent_small.png" alt="truevibe heart pink logo">
     <form @submit.prevent="handleLogin()">
       <h1 class="text-3xl mb-5">Login</h1>
       <label>Email <input v-model="form.email" type="email" /></label>
       <label>Password <input v-model="form.password" type="password" /></label>
       <button>Login</button>
-      <router-link to="/forgotPassword">Forgot Password?</router-link>
+      <router-link to="/forgot-password">Forgot Password?</router-link>
     </form>
     <div class="mt-5">
       <a @click.prevent="handleLogin('github')">Github</a>

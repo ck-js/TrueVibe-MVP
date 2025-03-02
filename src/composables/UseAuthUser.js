@@ -40,7 +40,7 @@ export default function useAuthUser() {
    * Logout
    */
   const logout = async () => {
-    const { error } = supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };
 
@@ -82,8 +82,8 @@ export default function useAuthUser() {
    * Send user an email to reset their password
    * (ie. support "Forgot Password?")
    */
-  const sendPasswordRestEmail = async (email) => {
-    const { user, error } = await supabase.auth.api.resetPasswordForEmail(
+  const sendPasswordResetEmail = async (email) => {
+    const { user, error } = await supabase.auth.resetPasswordForEmail(
       email
     );
     if (error) throw error;
@@ -105,7 +105,7 @@ export default function useAuthUser() {
     logout,
     register,
     update,
-    sendPasswordRestEmail,
+    sendPasswordResetEmail,
     maybeHandleEmailConfirmation,
   };
 }

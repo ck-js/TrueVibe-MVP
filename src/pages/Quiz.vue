@@ -91,7 +91,7 @@ export default {
 </script>
 <template>
     <div class="quiz">
-        <div v-if="!isSubmitted">
+        <div v-if="!isSubmitted" >
         <div v-if="currentQuestionIndex < questions.length">
             <h2>{{ questions[currentQuestionIndex].question }}</h2>
             <div class="choices">
@@ -105,7 +105,9 @@ export default {
                 </button>
             </div>
             <div class="navigation-buttons">
+
                 <button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Back</button>
+                
                 <!-- <button @click="nextQuestion" :disabled="currentQuestionIndex > questions.length - 1">Next</button> -->
                 <!-- <button @click="nextQuestion" :disabled="answers[currentQuestionIndex] === ''">Next</button> -->
                 <button @click="nextQuestion">Next</button>
@@ -118,7 +120,7 @@ export default {
             <p>Check your email soon for a tailored report</p>
             <form @submit.prevent="submitQuiz">
                 <input type="email" v-model="email" placeholder="Enter your email" required/>
-                <div class="navigation-buttons">
+                <div class="navigation-buttons-2">
                     <button type="submit">Submit</button> 
                 </div>
             </form>
@@ -140,6 +142,7 @@ export default {
 </template>
 <style scoped>
 .quiz {
+    
     max-width: 600px;
     
     margin: 0 auto;
@@ -179,12 +182,23 @@ color: inherit;
 }
 .navigation-buttons {
     display: flex;
-    flex-direction: column;
-    row-gap: 9px;
+justify-content: space-between;
+
     margin: 27px auto;
     
 }
 .navigation-buttons button {
+background-color: salmon;
+color: white;
+    
+}
+.navigation-buttons-2 {
+    display: flex;
+justify-content: center;
+    margin: 27px auto;
+    
+}
+.navigation-buttons-2 button {
 background-color: salmon;
 color: white;
     
@@ -211,6 +225,7 @@ input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 </style>```
 
 

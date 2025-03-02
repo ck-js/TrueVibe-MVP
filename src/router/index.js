@@ -37,7 +37,17 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-  }
+    
+  },
+  {
+    name: "Logout",
+    path: "/logout",
+    beforeEnter: async () => {
+      const { logout } = useAuthUser();
+      await logout();
+      return { name: "Home" };
+    },
+  },
 
   
 ]
