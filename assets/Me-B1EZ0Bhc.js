@@ -1,0 +1,1 @@
+import{l as t,c as a,a as s,t as o,m as r,o as n,g as c}from"./index-BxMA0_3b.js";const u={key:0},i={__name:"Me",setup(_){const{user:e}=c();return(l,m)=>t(e)?(n(),a("div",u,[s("div",null,"Hello "+o(t(e).user_metadata.name),1)])):r("",!0)}};export{i as default};
