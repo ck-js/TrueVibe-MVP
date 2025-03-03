@@ -36,9 +36,9 @@ const handleLogin = async (provider) => {
       <button>Login</button>
       <router-link to="/forgot-password">Forgot Password?</router-link>
     </form>
-    <div class="mt-5">
+    <!-- <div class="mt-5">
       <a @click.prevent="handleLogin('github')">Github</a>
-    </div>
+    </div> -->
   </div>
 </template>
 
