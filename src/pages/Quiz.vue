@@ -109,14 +109,16 @@ export default {
                 <button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Back</button>
                 
                 <!-- <button @click="nextQuestion" :disabled="currentQuestionIndex > questions.length - 1">Next</button> -->
-                <!-- <button @click="nextQuestion" :disabled="answers[currentQuestionIndex] === ''">Next</button> -->
-                <button @click="nextQuestion">Next</button>
+                <button @click="nextQuestion" :disabled="answers[currentQuestionIndex] === ''">Next</button>
+                <!-- <button @click="nextQuestion">Next</button> -->
                 
             </div>
         </div>
         <div v-else>
             <h2>Quiz Completed</h2>
+            <img src="../assets/true vibe logo_transparent_small.png" alt="">
             <p>Thank you for completing the quiz!</p>
+            
             <p>Check your email soon for a tailored report</p>
             <form @submit.prevent="submitQuiz">
                 <input type="email" v-model="email" placeholder="Enter your email" required/>
@@ -225,7 +227,10 @@ input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
+img {
+    max-width: 50%;
+    max-height: 50%;
+}
 </style>```
 
 
