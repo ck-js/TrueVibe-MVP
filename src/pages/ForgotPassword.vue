@@ -13,7 +13,9 @@ const email = ref("");
 const handlePasswordReset = async () => {
   await sendPasswordResetEmail(email.value);
   alert(`Password reset email sent to: ${email.value}`);
+  
 };
+
 </script>
 <template>
   <form @submit.prevent="handlePasswordReset()">
