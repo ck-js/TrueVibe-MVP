@@ -1,0 +1,1 @@
+import{_ as o,c as i,a as r,t,o as s}from"./index-CK7kMVBJ.js";const a={};function l(n,e){return s(),i("div",null,[e[0]||(e[0]=r("h1",null,"Thanks for registering!",-1)),r("p",null," Please confirm your email to finish registering & be one step closer to finding your TrueVibe: "+t(n.$route.query.email),1)])}const f=o(a,[["render",l]]);export{f as default};
