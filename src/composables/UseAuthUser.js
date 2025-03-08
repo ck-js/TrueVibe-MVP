@@ -86,7 +86,8 @@ export default function useAuthUser() {
     const { user, error } = await supabase.auth.resetPasswordForEmail(
       email,
       {
-        redirectTo: `https://truevibe.app/update-password`
+        // redirectTo: `https://truevibe.app/update-password`
+        redirectTo: `${window.location.origin}/update-password`
       }
     );
     if (error) throw error;
