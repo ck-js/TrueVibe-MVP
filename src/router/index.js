@@ -35,7 +35,7 @@ const routes = [
     name: "UpdatePassword",
     path: "/update-password",
     component: () => import("@/pages/UpdatePassword.vue"),
-    requiresAuth: true,
+
   },
   {name: "Me",
     path: "/me",
