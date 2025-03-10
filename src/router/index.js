@@ -5,7 +5,9 @@ import useAuthUser from "@/composables/UseAuthUser";
 const routes = [
     {
       name: "Home",
-      path: '/', redirect: '/quiz'},
+      path: '/', 
+      redirect: '/update-password'
+    },
     {
       name: "quiz",
       path: "/quiz",
