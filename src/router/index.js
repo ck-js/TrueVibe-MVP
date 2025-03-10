@@ -5,14 +5,11 @@ import useAuthUser from "@/composables/UseAuthUser";
 const routes = [
     {
       name: "Home",
-      path: '/', 
-      redirect: '/quiz'
+      path: '/',
+      component: () => import("@/pages/Quiz.vue"), 
+      // redirect: '/quiz'
     },
-    {
-      name: "quiz",
-      path: "/quiz",
-      component: () => import("@/pages/Quiz.vue"),
-    },
+    ,
   {
     name: "Register",
     path: "/register",
@@ -64,23 +61,21 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
   const { isLoggedIn } = useAuthUser();
-  if (
-    !isLoggedIn() &&
-    to.meta.requiresAuth &&
-    !Object.keys(to.query).includes("fromEmail")
-  ) {
-    return { name: "Login" };
+
+  // Check if the user is navigating to a specific route
+  if (to.query.redirect_to) {
+    // Navigate to the intended route specified in the redirect_to query parameter
+    next({ path: to.query.redirect_to });
+  } else if (!isLoggedIn() && to.meta.requiresAuth && !Object.keys(to.query).includes("fromEmail")) {
+    // Redirect to login if the route requires authentication and the user is not logged in
+    next({ name: "Login" });
+  } else {
+    next();
   }
 })
 export default router
-
-
-
-
-
-
 
 
 
