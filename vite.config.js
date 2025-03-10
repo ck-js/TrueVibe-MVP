@@ -10,7 +10,11 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  base: '/TrueVibe-MVP',
+  base: '/',
+  define: {
+    'process.env': process.env,
+  },
+  // base: '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

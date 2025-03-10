@@ -6,7 +6,7 @@ const routes = [
     {
       name: "Home",
       path: '/', 
-      redirect: '/update-password'
+      redirect: '/quiz'
     },
     {
       name: "quiz",
