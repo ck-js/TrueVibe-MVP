@@ -1,8 +1,10 @@
 <script setup>
 import useAuthUser from "@/composables/UseAuthUser";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 // use necessary composables
+const router = useRouter();
 const { sendPasswordResetEmail } = useAuthUser();
 
 // keep up with email
@@ -13,6 +15,10 @@ const email = ref("");
 const handlePasswordReset = async () => {
   await sendPasswordResetEmail(email.value);
   alert(`Password reset email sent to: ${email.value}`);
+  // go to /email-confirmation route
+  router.push({ name: "EmailConfirmation" });
+
+
   
 };
 

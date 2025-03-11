@@ -64,17 +64,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const { isLoggedIn } = useAuthUser();
 
-  // Check if the user is navigating to a specific route
-  if (to.query.redirect_to) {
-    // Navigate to the intended route specified in the redirect_to query parameter
-    next({ path: to.query.redirect_to });
+  // Check if there is a redirect query parameter
+  if (to.query.redirect) {
+    const redirect = to.query.redirect;
+    // Remove the redirect query parameter and navigate to the intended route
+    next({ path: redirect, query: {} });
   } else if (!isLoggedIn() && to.meta.requiresAuth && !Object.keys(to.query).includes("fromEmail")) {
     // Redirect to login if the route requires authentication and the user is not logged in
     next({ name: "Login" });
   } else {
     next();
   }
-})
+});
+
 export default router
 
 
