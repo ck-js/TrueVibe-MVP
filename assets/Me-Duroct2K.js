@@ -1,1 +1,0 @@
-import{l as t,c as a,a as s,t as o,m as r,o as n,h as c}from"./index-BLXV3Hk7.js";const u={key:0},i={__name:"Me",setup(_){const{user:e}=c();return(l,m)=>t(e)?(n(),a("div",u,[s("div",null,"Hello "+o(t(e).user_metadata.name),1)])):r("",!0)}};export{i as default};
