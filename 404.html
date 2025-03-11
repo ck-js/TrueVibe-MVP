@@ -1,7 +1,23 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="refresh" content="0; URL=/" />
+  </head>
+  <body>
+  </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+      // Capture the original URL
+      var redirectTo = window.location.pathname + window.location.search + window.location.hash;
+      // Redirect to the root with the original URL as a query parameter
+      window.location.replace('/?redirect=' + encodeURIComponent(redirectTo));
+    </script>
   </head>
   <body>
   </body>
