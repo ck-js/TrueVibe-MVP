@@ -1,0 +1,1 @@
+import{_ as t,i as e,c as n,a as i,j as r,h as c,o as m}from"./index-L52L6L0p.js";const _={class:"confirmation"},l={__name:"EmailConfirmation",setup(u){const o=r(),{maybeHandleEmailConfirmation:s}=c();return e(async()=>{await s(o)}),(d,a)=>(m(),n("div",_,a[0]||(a[0]=[i("h1",null,"Processing...",-1)])))}},p=t(l,[["__scopeId","data-v-4d0586ab"]]);export{p as default};
