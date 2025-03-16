@@ -1,1 +1,0 @@
-import{p as t,c as a,a as s,t as o,q as r,o as n,h as c}from"./index-L52L6L0p.js";const u={key:0},d={__name:"Me",setup(_){const{user:e}=c();return(l,m)=>t(e)?(n(),a("div",u,[s("div",null,"Hello "+o(t(e).user_metadata.name),1)])):r("",!0)}};export{d as default};
