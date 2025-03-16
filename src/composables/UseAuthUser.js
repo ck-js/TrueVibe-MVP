@@ -1,55 +1,55 @@
-import useSupabase from '@/composables/UseSupabase'
-import { ref } from "vue";
+import useSupabase from "@/composables/UseSupabase"
+import { ref } from "vue"
 
 // user is set outside of the useAuthUser function
 // so that it will act as global state and always refer to a single user
-const user = ref(null);
+const user = ref(null)
 
 export default function useAuthUser() {
-  const { supabase } = useSupabase();
+  const { supabase } = useSupabase()
 
   /**
    * Login with email and password
    */
   const login = async ({ email, password }) => {
-    const { user: loggedInUser, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw error;
-    return user;
-  };
+    const { user: loggedInUser, error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) throw error
+    return user
+  }
 
   /**
    * Login with refresh token
    * Useful for logging in after email confirmations
    */
   const loginWithRefreshToken = async (token) => {
-    const { user, error } = await supabase.auth.signIn({ refreshToken: token });
-    if (error) throw error;
-    return user;
-  };
+    const { user, error } = await supabase.auth.signIn({ refreshToken: token })
+    if (error) throw error
+    return user
+  }
 
   /**
    * Login with google, github, etc
    */
-  const loginWithSocialProvider = async (token) => {
-    const { user: loggedInUser, error } = await supabase.auth.signInWithOAuth({ provider });
-    if (error) throw error;
-    return user;
-  };
+  const loginWithSocialProvider = async (provider) => {
+    const { user: loggedInUser, error } = await supabase.auth.signInWithOAuth({ provider })
+    if (error) throw error
+    return user
+  }
 
   /**
    * Logout
    */
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-  };
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
+  }
 
   /**
    * Check if the user is logged in or not
    */
   const isLoggedIn = () => {
-    return !!user.value;
-  };
+    return !!user.value
+  }
 
   /**
    * Register
@@ -63,37 +63,32 @@ export default function useAuthUser() {
         data: meta,
         // the to redirect to after the user confirms their email
         redirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation"`,
-      }
-    );
-    if (error) throw error;
-    return user;
-  };
+      },
+    )
+    if (error) throw error
+    return user
+  }
 
   /**
    * Update user email, password, or meta data
    */
   const update = async (data) => {
-    const { user, error } = await supabase.auth.update(data);
-    if (error) throw error;
-    return user;
-  };
+    const { user, error } = await supabase.auth.update(data)
+    if (error) throw error
+    return user
+  }
 
   /**
    * Send user an email to reset their password
    * (ie. support "Forgot Password?")
    */
   const sendPasswordResetEmail = async (email) => {
-    const { user, error } = await supabase.auth.resetPasswordForEmail(
-      email,
-      {
-    
-        redirectTo: `${window.location.origin}/update-password`
-        
-      }
-    );
-    if (error) throw error;
-    return user;
-  };
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/update-password`,
+    })
+    if (error) throw error
+    return data
+  }
 
   /**
    * Will be useful for informing the application what to do
@@ -101,32 +96,28 @@ export default function useAuthUser() {
    * after confirming email address
    */
   const maybeHandleEmailConfirmation = async (route) => {
-    const { supabase } = useSupabase();
-  
-    // Check if the URL contains a type parameter for email confirmation or password reset
-    const type = route.query.type;
-    const accessToken = route.query.access_token;
-  
-    if (type === 'recovery' && accessToken) {
-      // Handle password reset
+    // We don't need to do anything special here for password reset
+    // The user will be automatically redirected to the update-password page
+    // where they can set their new password
+
+    // For email confirmation, we can handle it here
+    if (route.query.type === "signup" && route.query.token) {
       try {
-        const { error } = await supabase.auth.updateUser(accessToken, { password: 'new-password' });
-        if (error) throw error;
-        alert('Password has been reset successfully.');
+        // The token is automatically handled by Supabase
+        // We just need to check if the user is now authenticated
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
+        if (session) {
+          user.value = session.user
+          alert("Email has been confirmed successfully.")
+        }
       } catch (error) {
-        alert('Error resetting password: ' + error.message);
-      }
-    } else if (type === 'signup' && accessToken) {
-      // Handle email confirmation
-      try {
-        const { error } = await supabase.auth.updateUser(accessToken, { email_confirmed: true });
-        if (error) throw error;
-        alert('Email has been confirmed successfully.');
-      } catch (error) {
-        alert('Error confirming email: ' + error.message);
+        alert("Error confirming email: " + error.message)
       }
     }
-  };
+  }
+
   return {
     user,
     login,
@@ -138,5 +129,6 @@ export default function useAuthUser() {
     update,
     sendPasswordResetEmail,
     maybeHandleEmailConfirmation,
-  };
+  }
 }
+

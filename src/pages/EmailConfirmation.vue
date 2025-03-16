@@ -1,6 +1,6 @@
 <template>
   <div class="confirmation">
-    <h1>Processing...</h1>
+    <h1>Thanks! Check your email</h1>
   </div>
 </template>
 
