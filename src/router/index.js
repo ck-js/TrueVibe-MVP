@@ -53,6 +53,23 @@ const routes = [
       return { name: "Home" };
     },
   },
+  {
+    name: "Matches",
+    path: "/matches",
+    component: () => import("@/pages/Matches.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+
+  },
+  {
+    name: "Growth",
+    path: "/growth",
+    component: () => import("@/pages/Growth.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  }
 
   
 ]

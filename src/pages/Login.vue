@@ -34,7 +34,8 @@ const handleLogin = async (provider) => {
       <label>Email <input v-model="form.email" type="email" /></label>
       <label>Password <input v-model="form.password" type="password" /></label>
       <button>Login</button>
-      <router-link to="/forgot-password">Forgot Password?</router-link>
+      <br>
+      <router-link to="/register">Don't have an account? Register here?</router-link>
     </form>
     <!-- <div class="mt-5">
       <a @click.prevent="handleLogin('github')">Github</a>
