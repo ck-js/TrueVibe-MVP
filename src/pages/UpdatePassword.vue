@@ -17,16 +17,17 @@ const handleUpdatePassword = async () => {
     message.value = 'Password updated successfully!';
   } catch (error) {
     message.value = `Error: ${error.message}`;
+    console.error(error);
   }
 };
 
 
 </script>
 <template>
-  <form @submit.prevent="handlePasswordReset()">
+  <form @submit.prevent="handleUpdatePassword()">
     <p>{{ message }}</p>
     <h1>Update Password?</h1>
-    <label>New Password <input v-model="password" type="password" /></label>
+    <label>New Password <input v-model="newPassword" type="password" /></label>
     <button>Reset Password</button>
   </form>
 </template>

@@ -86,8 +86,9 @@ export default function useAuthUser() {
     const { user, error } = await supabase.auth.resetPasswordForEmail(
       email,
       {
-        redirectTo: `https://truevibe.app/update-password`
-        // redirectTo: `${window.location.origin}/update-password`
+    
+        redirectTo: `${window.location.origin}/update-password`
+        
       }
     );
     if (error) throw error;
@@ -99,7 +100,33 @@ export default function useAuthUser() {
    * when Supabase redirects a user back to app
    * after confirming email address
    */
-  const maybeHandleEmailConfirmation = async (route) => {};
+  const maybeHandleEmailConfirmation = async (route) => {
+    const { supabase } = useSupabase();
+  
+    // Check if the URL contains a type parameter for email confirmation or password reset
+    const type = route.query.type;
+    const accessToken = route.query.access_token;
+  
+    if (type === 'recovery' && accessToken) {
+      // Handle password reset
+      try {
+        const { error } = await supabase.auth.updateUser(accessToken, { password: 'new-password' });
+        if (error) throw error;
+        alert('Password has been reset successfully.');
+      } catch (error) {
+        alert('Error resetting password: ' + error.message);
+      }
+    } else if (type === 'signup' && accessToken) {
+      // Handle email confirmation
+      try {
+        const { error } = await supabase.auth.updateUser(accessToken, { email_confirmed: true });
+        if (error) throw error;
+        alert('Email has been confirmed successfully.');
+      } catch (error) {
+        alert('Error confirming email: ' + error.message);
+      }
+    }
+  };
   return {
     user,
     login,
