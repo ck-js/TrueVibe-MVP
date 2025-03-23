@@ -20,7 +20,7 @@ const handleLogin = async (provider) => {
     provider
       ? await loginWithSocialProvider(provider)
       : await login(form.value);
-    router.push({ name: "Me" });
+    router.push({ name: "QuizAuth" });
   } catch (error) {
     alert('Hmm...' +error.message);
   }

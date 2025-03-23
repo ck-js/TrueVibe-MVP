@@ -68,8 +68,17 @@ const routes = [
     component: () => import("@/pages/Growth.vue"),
     meta: {
       requiresAuth: true,
-    },
-  }
+    }
+  },
+    {
+      name: "QuizAuth",
+      path: "/quiz-auth",
+      component: () => import("@/pages/QuizAuth.vue"),
+      meta: {
+        requiresAuth: true,
+      },
+    }
+  
 
   
 ]
