@@ -169,6 +169,7 @@ const selectAnswer = (index) => {
 const submitSelfAssessment = async () => {
   console.log('Submitting self-assessment...');
 
+  // Check if the user is authenticated
   if (!user.value) {
     console.error('User is not authenticated');
     return;
@@ -177,6 +178,7 @@ const submitSelfAssessment = async () => {
   const userId = user.value.id;
   console.log('User ID:', userId);
 
+  // Check if answers are provided
   if (!answers.value || answers.value.length === 0) {
     console.error('No answers provided');
     return;
@@ -185,11 +187,21 @@ const submitSelfAssessment = async () => {
   console.log('Answers:', answers.value);
   console.log('Making fetch request to submit self-assessment...');
 
+  // Get the JWT token from the user's session
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) {
+    console.error('Error retrieving session:', sessionError);
+    return;
+  }
+
+  const jwtToken = session?.access_token; // Get the JWT token
+
   try {
-    const response = await fetch('https://rattfxpufuehmlmakbam.supabase.co/functions/v1/submit-self-assessment', {
+    const response = await fetch('https://rattfxpufuehmlmakbam.supabase.co/functions/v1/submit_self_assessment_v2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwtToken}`, // Include the JWT token in the Authorization header
       },
       body: JSON.stringify({
         user_id: userId,
@@ -205,7 +217,7 @@ const submitSelfAssessment = async () => {
       return; // Optionally handle the error here
     }
 
-    isSubmitted.value = true;
+    isSubmitted.value = true; // Update the state to indicate submission success
     console.log('Self-assessment submitted successfully:', data);
     return data; // Return data if needed for further processing
   } catch (error) {
@@ -214,7 +226,7 @@ const submitSelfAssessment = async () => {
 };
 
 
-alert(user.value.id)
+
 </script>
 
 <template>
