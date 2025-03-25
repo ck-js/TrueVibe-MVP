@@ -166,64 +166,22 @@ const selectAnswer = (index) => {
   answers.value[currentQuestionIndex.value] = questions.value[currentQuestionIndex.value].choices[index];
 };
 
-const submitSelfAssessment = async () => {
-  console.log('Submitting self-assessment...');
+const submitQuiz = async () => {
+      try {
+        const { data, error } = await supabase.rpc('submit_quiz', {
+          quiz_data: this.answers, // Pass the quiz array as JSON
+        });
 
-  // Check if the user is authenticated
-  if (!user.value) {
-    console.error('User is not authenticated');
-    return;
-  }
+        if (error) {
+          console.error('Error submitting quiz:', error.message);
+          return;
+        }
 
-  const userId = user.value.id;
-  console.log('User ID:', userId);
-
-  // Check if answers are provided
-  if (!answers.value || answers.value.length === 0) {
-    console.error('No answers provided');
-    return;
-  }
-
-  console.log('Answers:', answers.value);
-  console.log('Making fetch request to submit self-assessment...');
-
-  // Get the JWT token from the user's session
-  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-  if (sessionError) {
-    console.error('Error retrieving session:', sessionError);
-    return;
-  }
-
-  const jwtToken = session?.access_token; // Get the JWT token
-
-  try {
-    const response = await fetch('https://rattfxpufuehmlmakbam.supabase.co/functions/v1/submit_self_assessment_v2', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwtToken}`, // Include the JWT token in the Authorization header
-      },
-      body: JSON.stringify({
-        user_id: userId,
-        answers: answers.value,
-      }),
-    });
-
-    const data = await response.json();
-    console.log('Response:', data);
-
-    if (!response.ok) {
-      console.error(data.error || 'Failed to submit self-assessment answers');
-      return; // Optionally handle the error here
-    }
-
-    isSubmitted.value = true; // Update the state to indicate submission success
-    console.log('Self-assessment submitted successfully:', data);
-    return data; // Return data if needed for further processing
-  } catch (error) {
-    console.error('Error submitting self-assessment:', error);
-  }
-};
+        console.log('Quiz submitted successfully:', data);
+      } catch (err) {
+        console.error('Unexpected error:', err);
+      }
+}
 
 
 
@@ -256,7 +214,7 @@ const submitSelfAssessment = async () => {
         <img src="../assets/true vibe logo_transparent_small.png" alt="">
         <p>Thank you for completing the quiz!</p>
         <p>Check your email soon for a tailored report</p>
-        <form @submit.prevent="submitSelfAssessment">
+        <form @submit.prevent="submitQuiz">
           <div class="navigation-buttons-2">
             <button type="submit">Submit</button> 
           </div>
@@ -349,3 +307,11 @@ img {
   max-height: 50%;
 }
 </style>
+
+
+
+
+
+
+
+
