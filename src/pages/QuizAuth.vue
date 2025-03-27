@@ -169,7 +169,7 @@ const selectAnswer = (index) => {
 const submitQuiz = async () => {
       try {
         const { data, error } = await supabase.rpc('submit_quiz', {
-          quiz_data: this.answers, // Pass the quiz array as JSON
+          quiz_data: answers.value, // Pass the quiz array as JSON
         });
 
         if (error) {
@@ -178,6 +178,7 @@ const submitQuiz = async () => {
         }
 
         console.log('Quiz submitted successfully:', data);
+        isSubmitted.value = true;
       } catch (err) {
         console.error('Unexpected error:', err);
       }

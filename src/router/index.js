@@ -6,8 +6,8 @@ const routes = [
     {
       name: "Home",
       path: '/',
-      component: () => import("@/pages/Quiz.vue"), 
-      // redirect: '/quiz'
+      component: () => import("@/pages/Login.vue"), 
+      
     },
     ,
   {
@@ -66,6 +66,14 @@ const routes = [
     name: "Growth",
     path: "/growth",
     component: () => import("@/pages/Growth.vue"),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    name: "Report",
+    path: "/report",
+    component: () => import("@/pages/Report.vue"),
     meta: {
       requiresAuth: true,
     }

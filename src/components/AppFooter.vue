@@ -4,6 +4,7 @@
       <ul>
         <li><router-link :to="{ name: 'Matches' }">Matches</router-link></li>
         <li><router-link :to="{ name: 'Growth' }">Growth</router-link></li>
+        <li><router-link :to="{ name: 'Report' }">Report</router-link></li>
         <li><router-link :to="{ name: 'Me' }">Profile</router-link></li>
       </ul>
     </div>
